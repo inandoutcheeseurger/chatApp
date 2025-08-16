@@ -1,27 +1,27 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { auth } from "./firebase-config.js";
+import { signInWithEmailAndPassword, onAuthStateChanged } 
+  from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-const firebaseConfig = {
-    apiKey: "YOUR-KEY",
-    authDomain: "YOUR-PROJECT.firebaseapp.com",
-    projectId: "YOUR-PROJECT"
-};
+const loginForm = document.getElementById("loginForm");
+const errorMsg = document.getElementById("errorMsg");
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// If user already logged in, redirect them
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "chat.html";
+  }
+});
 
-document.getElementById("loginBtn").onclick = () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    signInWithEmailAndPassword(auth, email, password)
-    .then(() => window.location.href = "chat.html")
-    .catch(err => alert(err.message));
-};
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-document.getElementById("signupBtn").onclick = () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    createUserWithEmailAndPassword(auth, email, password)
-    .then(() => window.location.href = "chat.html")
-    .catch(err => alert(err.message));
-};
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "chat.html";
+  } catch (error) {
+    errorMsg.textContent = "Login failed: " + error.message;
+  }
+});

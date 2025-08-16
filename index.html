@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Bros Login</title>
+  <title>Login</title>
 </head>
 <body>
-  <h1>Login</h1>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <button id="signupBtn">Sign Up (for bros only)</button>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
 
-  <script type="module" src="js.login.js"></script>
+  <p id="errorMsg" style="color:red;"></p>
+
+  <script type="module" src="js/login.js"></script>
 </body>
 </html>

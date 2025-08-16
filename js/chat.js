@@ -24,9 +24,10 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-document.getElementById("logoutBtn").onclick = () => {
-  signOut(auth);
-};
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "login.html";
+});
 
 // Send message
 document.getElementById("sendBtn").onclick = async () => {
