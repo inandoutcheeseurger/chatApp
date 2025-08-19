@@ -24,12 +24,22 @@ onAuthStateChanged(auth, user => {
 
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 });
 
 // Send message
-document.getElementById("sendBtn").onclick = async () => {
-  const text = document.getElementById("messageInput").value.trim();
+document.getElementById("sendBtn").onclick = sendMsg();
+
+document.getElementById("messageInput").addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // stop newline
+      sendMsg();          // call your function
+    }
+    // if Shift+Enter → allow normal newline (do nothing)
+});
+
+async function sendMsg(){
+    const text = document.getElementById("messageInput").value.trim();
   if (text) {
     await addDoc(collection(db, "messages"), {
       text: text,
@@ -39,7 +49,7 @@ document.getElementById("sendBtn").onclick = async () => {
     });
     document.getElementById("messageInput").value = "";
   }
-};
+}
 
 // Listen for new messages
 const q = query(collection(db, "messages"), orderBy("createdAt"));

@@ -25,3 +25,4 @@ loginForm.addEventListener("submit", async (e) => {
     errorMsg.textContent = "Login failed: " + error.message;
   }
 });
+
