@@ -1,6 +1,6 @@
 import { auth } from "./firebase-config.js";
 import { signInWithEmailAndPassword, onAuthStateChanged } 
-  from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 const loginForm = document.getElementById("loginForm");
 const errorMsg = document.getElementById("errorMsg");
@@ -12,10 +12,10 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-loginForm.addEventListener("submit", loginForm);
+loginForm.addEventListener("submit", login);
 
 
-async function loginForm(){
+async function login(){
     e.preventDefault();
 
   const email = document.getElementById("email").value;
