@@ -12,8 +12,11 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-loginForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+loginForm.addEventListener("submit", loginForm);
+
+
+async function loginForm(){
+    e.preventDefault();
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -22,7 +25,6 @@ loginForm.addEventListener("submit", async (e) => {
     await signInWithEmailAndPassword(auth, email, password);
     window.location.href = "chat.html";
   } catch (error) {
-    errorMsg.textContent = "Login failed: " + error.message;
-  }
-});
-
+    alert("Signup failed: " + error.message);
+  }   
+}
