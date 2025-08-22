@@ -28,7 +28,7 @@ logoutBtn.addEventListener("click", async () => {
 });
 
 // Send message
-document.getElementById("sendBtn").onclick = sendMsg();
+document.getElementById("sendBtn").onclick = sendMsg;
 
 document.getElementById("messageInput").addEventListener("keydown", function (event) {
     if (event.key === "Enter" && !event.shiftKey) {
