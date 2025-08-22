@@ -70,3 +70,5 @@ async function listenForMessages(callback) {
     callback(messages);  // <-- 2
   });
 }
+
+listenForMessages();
