@@ -3,6 +3,7 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 import {
   collection,
   addDoc,
+  getDoc,
   query,
   orderBy,
   onSnapshot,
@@ -51,16 +52,21 @@ async function sendMsg(){
   }
 }
 
-// Listen for new messages
-const q = query(collection(db, "messages"), orderBy("createdAt"));
-onSnapshot(q, snapshot => {
-  const messagesDiv = document.getElementById("messages");
-  messagesDiv.innerHTML = "";
-  snapshot.forEach(doc => {
-    const msg = doc.data();
-    const div = document.createElement("div");
-    div.textContent = msg.email + ": " + msg.text;
-    messagesDiv.appendChild(div);
+async function listenForMessages(callback) {
+  const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
+  onSnapshot(q, async (snapshot) => {   // <-- 1
+    const messages = [];
+    for (const change of snapshot.docChanges()) {
+      const msgData = change.doc.data();
+      const userDoc = await getDoc(doc(db, "users", msgData.uid));
+      const username = userDoc.exists() ? userDoc.data().username : "Unknown";
+      messages.push({
+        id: change.doc.id,
+        text: msgData.text,
+        username: username,
+        createdAt: msgData.createdAt
+      });
+    }
+    callback(messages);  // <-- 2
   });
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-});
+}
