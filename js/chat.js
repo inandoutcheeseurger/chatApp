@@ -71,4 +71,12 @@ async function listenForMessages(callback) {
   });
 }
 
-listenForMessages();
+function updateChatLog(messages){
+  document.getElementById("messages");
+  for (message of messages){
+    // const currMsg = document.createElement("span");
+    console.log(message);
+  }
+}
+
+listenForMessages(updateChatLog);
