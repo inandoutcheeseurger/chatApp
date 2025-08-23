@@ -15,7 +15,7 @@ onAuthStateChanged(auth, (user) => {
 loginForm.addEventListener("submit", login);
 
 
-async function login(){
+async function login(e){
     e.preventDefault();
 
   const email = document.getElementById("email").value;
