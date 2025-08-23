@@ -17,8 +17,10 @@ body {
   border-radius: 4px;
 }
 .mine {
-  background-color: #d1ffd1;
+  text-align: right;
+  background-color: #a2f3a2;
 }
 .theirs {
-  background-color: #f0f0f0;
+  text-align: left;
+  background-color: #e3e3e3;
 }

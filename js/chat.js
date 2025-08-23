@@ -68,6 +68,7 @@ async function listenForMessages(callback) {
         const username = userDoc.exists() ? userDoc.data().username : "Unknown";
         messages.push({
           id: docSnap.id,
+          uid: msgData.uid,
           text: msgData.text,
           username: username,
           createdAt: msgData.createdAt
@@ -83,6 +84,7 @@ async function listenForMessages(callback) {
           const username = userDoc.exists() ? userDoc.data().username : "Unknown";
           messages.push({
             id: change.doc.id,
+            uid: msgData.uid,
             text: msgData.text,
             username: username,
             createdAt: msgData.createdAt
@@ -92,18 +94,40 @@ async function listenForMessages(callback) {
     }
 
     if (messages.length > 0) {
-      callback(messages);
+      callback(messages, auth.currentUser.uid);
     }
   });
 }
 
 
-function updateChatLog(messages){
-  document.getElementById("messages");
-  for (const message of messages){
-    // const currMsg = document.createElement("span");
-    console.log(message);
+function updateChatLog(messages, currentUserId) {
+  const messageDiv = document.getElementById("messages");
+
+  for (const message of messages) {
+    // create a new div/span for this message
+    const currMsgDiv = document.createElement("div");
+
+    // mark as mine/theirs
+    if (message.uid === currentUserId) {
+      currMsgDiv.classList.add("mine");
+    } else {
+      const currMsgSender = document.createElement("div");
+      currMsgSender.textContent = message.username;
+      currMsgDiv.appendChild(currMsgSender);
+      currMsgDiv.classList.add("theirs");
+    }
+
+    const currMsgTxt = document.createElement("div");
+    currMsgTxt.textContent = message.text;
+    currMsgDiv.appendChild(currMsgTxt);
+
+    // append to message container
+    messageDiv.appendChild(currMsgDiv);
+
+    // optional: scroll to bottom
+    messageDiv.scrollTop = messageDiv.scrollHeight;
   }
 }
+
 
 listenForMessages(updateChatLog);
