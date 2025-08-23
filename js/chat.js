@@ -55,22 +55,48 @@ async function sendMsg(){
 
 async function listenForMessages(callback) {
   const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
-  onSnapshot(q, async (snapshot) => {   // <-- 1
+  let isInitial = true;
+
+  onSnapshot(q, async (snapshot) => {
     const messages = [];
-    for (const change of snapshot.docChanges()) {
-      const msgData = change.doc.data();
-      const userDoc = await getDoc(doc(db, "users", msgData.uid));
-      const username = userDoc.exists() ? userDoc.data().username : "Unknown";
-      messages.push({
-        id: change.doc.id,
-        text: msgData.text,
-        username: username,
-        createdAt: msgData.createdAt
-      });
+
+    if (isInitial) {
+      // First load → get ALL docs
+      for (const docSnap of snapshot.docs) {
+        const msgData = docSnap.data();
+        const userDoc = await getDoc(doc(db, "users", msgData.uid));
+        const username = userDoc.exists() ? userDoc.data().username : "Unknown";
+        messages.push({
+          id: docSnap.id,
+          text: msgData.text,
+          username: username,
+          createdAt: msgData.createdAt
+        });
+      }
+      isInitial = false;
+    } else {
+      // After first load → only new/changed docs
+      for (const change of snapshot.docChanges()) {
+        if (change.type === "added") {
+          const msgData = change.doc.data();
+          const userDoc = await getDoc(doc(db, "users", msgData.uid));
+          const username = userDoc.exists() ? userDoc.data().username : "Unknown";
+          messages.push({
+            id: change.doc.id,
+            text: msgData.text,
+            username: username,
+            createdAt: msgData.createdAt
+          });
+        }
+      }
     }
-    callback(messages);  // <-- 2
+
+    if (messages.length > 0) {
+      callback(messages);
+    }
   });
 }
+
 
 function updateChatLog(messages){
   document.getElementById("messages");
