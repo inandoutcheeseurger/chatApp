@@ -74,7 +74,7 @@ async function listenForMessages(callback) {
 
 function updateChatLog(messages){
   document.getElementById("messages");
-  for (message of messages){
+  for (const message of messages){
     // const currMsg = document.createElement("span");
     console.log(message);
   }
