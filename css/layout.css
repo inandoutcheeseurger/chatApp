@@ -1,0 +1,132 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General layout */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 90%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  background-color: #4CAF50;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+}
+
+.main-container {
+  display: flex;
+  height: 100%;
+}
+
+/* Navigation styles (left section) */
+.navigation {
+  width: 30%;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation ul {
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+.navigation ul li {
+  padding: 10px;
+  background-color: #e0e0e0;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.navigation ul li:hover {
+  background-color: #ccc;
+}
+
+.user-info {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.user-info span {
+  font-size: 14px;
+}
+
+.user-info button {
+  font-size: 12px;
+  padding: 5px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.user-info button:hover {
+  background-color: #e60000;
+}
+
+/* Content styles (right section) */
+.content {
+  width: 70%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fafafa;
+  border-radius: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}

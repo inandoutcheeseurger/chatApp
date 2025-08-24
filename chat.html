@@ -1,18 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chat Session</title>
-  <link rel="stylesheet" href="main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chatApp</title>
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/layout.css">
 </head>
 <body>
-  <h1>🔥 Messenger</h1>
-  <button id="logoutBtn">Logout</button>
-  <div id="messages"></div>
-  <input type="text" id="messageInput" placeholder="Type your message...">
-  <button id="sendBtn">Send</button>
+  <div class="wrapper">
+    <!-- Header -->
+    <header>
+      <h1>chatApp</h1>
+    </header>
 
+    <!-- Main content layout -->
+    <div class="main-container">
+      
+      <!-- Navigation (list of chat rooms) -->
+      <div class="navigation">
+        <div id="userInfo" class="user-info">
+          <span id="username">Username</span>
+          <button id="logoutBtn">Logout</button>
+        </div>
+        <ul id="chatRoomsList">
+          <!-- Chat rooms will be added dynamically here -->
+        </ul>
+      </div>
+
+      <!-- Content (chat room messages) -->
+      <div class="content">
+        <div id="messages" class="messages">
+          <!-- Messages will be displayed here -->
+        </div>
+        <textarea id="messageInput" placeholder="Type a message..."></textarea>
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
   <script type="module" src="js/chat.js"></script>
-
 </body>
 </html>
