@@ -1,20 +1,59 @@
+/* Container for messages */
 #messages {
   border: 1px solid #ccc;
   height: 300px;
   overflow-y: scroll;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 10px;
+  background-color: #f7f7f7;  /* Light background for the chat area */
 }
+
+/* Message wrapper */
 .message {
-  padding: 5px;
-  margin: 2px 0;
-  border-radius: 4px;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 15px;
+  display: inline-block;
+  max-width: 80%;
 }
+
+/* My messages */
 .mine {
-  text-align: right;
-  background-color: #a2f3a2;
+  text-align: right;  /* Align messages to the right */
+  background-color: #5865f2;  /* Discord blurple color */
+  color: white;
+  border-radius: 15px 15px 0 15px; /* rounded corners for right bubble */
 }
+
+/* Other people's messages */
 .theirs {
-  text-align: left;
+  text-align: left;  /* Align messages to the left */
   background-color: #e3e3e3;
+  color: black;
+  border-radius: 15px 15px 15px 0; /* rounded corners for left bubble */
+}
+
+/* Sender's name for others' messages */
+.username {
+  font-size: 12px;
+  color: #7a7a7a;
+  margin-bottom: 5px;
+}
+
+/* Styling the message text */
+.msg-text {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+/* Adjust for small screen */
+@media (max-width: 600px) {
+  #messages {
+    height: 400px;
+  }
+  .message {
+    max-width: 95%;
+  }
 }
