@@ -14,6 +14,7 @@ import {
 
 let currentUser = null;
 
+
 // Ensure only logged-in users can access
 onAuthStateChanged(auth, user => {
   if (!user) {

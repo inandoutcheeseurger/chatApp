@@ -9,14 +9,12 @@
   padding: 5px;
   margin: 2px 0;
   border-radius: 4px;
-  border-top: 2px solid black;
+  border: 1px solid black;
 }
 .mine {
-  text-align: right;
   background-color: #23272a;
 }
 .theirs {
-  text-align: left;
   background-color: #2c2f33;
 }
 .messageTxt{
@@ -25,5 +23,6 @@
 }
 .username{
   color: lightgray;
-  font-size: 12px;
+  font-size: 10px;
+  width: fit-content;
 }
