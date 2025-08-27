@@ -104,27 +104,23 @@ function updateChatLog(messages, currentUserId) {
   const messageDiv = document.getElementById("messages");
 
   for (const message of messages) {
-    // create a new div for the message
+    // create a new div/span for this message
     const currMsgDiv = document.createElement("div");
     currMsgDiv.classList.add("message");
 
-    // mark as mine/theirs and add appropriate classes
+    // mark as mine/theirs
     if (message.uid === currentUserId) {
-      currMsgDiv.classList.add("mine");  // for my message
+      currMsgDiv.classList.add("mine");
     } else {
-      currMsgDiv.classList.add("theirs"); // for others' messages
-
-      // Add sender's name above the bubble for others' messages
       const currMsgSender = document.createElement("div");
       currMsgSender.textContent = message.username;
       currMsgSender.classList.add("username");
       currMsgDiv.appendChild(currMsgSender);
+      currMsgDiv.classList.add("theirs");
     }
 
-    // create the message bubble (text content)
     const currMsgTxt = document.createElement("div");
     currMsgTxt.textContent = message.text;
-    currMsgTxt.classList.add("msg-text"); // add a class for the message text
     currMsgDiv.appendChild(currMsgTxt);
 
     // append to message container
