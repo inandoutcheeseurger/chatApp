@@ -106,7 +106,7 @@ function updateChatLog(messages, currentUserId) {
   for (const message of messages) {
     // create a new div/span for this message
     const currMsgDiv = document.createElement("div");
-    currMsgDiv.classList.add("message");
+    currMsgDiv.classList.add("messageBox");
 
     // mark as mine/theirs
     if (message.uid === currentUserId) {
@@ -121,6 +121,7 @@ function updateChatLog(messages, currentUserId) {
 
     const currMsgTxt = document.createElement("div");
     currMsgTxt.textContent = message.text;
+    currMsgTxt.classList.add("mesageTxt");
     currMsgDiv.appendChild(currMsgTxt);
 
     // append to message container
