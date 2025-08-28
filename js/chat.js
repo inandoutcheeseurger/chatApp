@@ -109,20 +109,22 @@ function updateChatLog(messages, currentUserId) {
     const currMsgDiv = document.createElement("div");
     currMsgDiv.classList.add("messageBox");
 
+    const currMsgTxt = document.createElement("div");
+    currMsgTxt.textContent = message.text;
+    currMsgTxt.classList.add("mesageTxt");
+
     // mark as mine/theirs
     if (message.uid === currentUserId) {
-      currMsgDiv.classList.add("mine");
+      currMsgTxt.classList.add("mine");
+      currMsgDiv.classList.add("myMsgDiv")
     } else {
       const currMsgSender = document.createElement("div");
       currMsgSender.textContent = message.username;
       currMsgSender.classList.add("username");
       currMsgDiv.appendChild(currMsgSender);
-      currMsgDiv.classList.add("theirs");
-    }
+      currMsgTxt.classList.add("theirs");
+    } 
 
-    const currMsgTxt = document.createElement("div");
-    currMsgTxt.textContent = message.text;
-    currMsgTxt.classList.add("mesageTxt");
     currMsgDiv.appendChild(currMsgTxt);
 
     // append to message container

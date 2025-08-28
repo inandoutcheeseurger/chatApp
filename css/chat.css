@@ -8,18 +8,21 @@
 .messageBox {
   padding: 5px;
   margin: 2px 0;
-  border-radius: 4px;
-  border: 1px solid black;
 }
 .mine {
-  background-color: #23272a;
+  background-color: #430952;
+}
+.myMsgDiv{
+  text-align: right;
 }
 .theirs {
-  background-color: #2c2f33;
+  background-color: #1f2022;
 }
 .messageTxt{
   color: white;
   font-size: 15px;
+  width:fit-content;
+  border-radius: 20px;
 }
 .username{
   color: lightgray;
