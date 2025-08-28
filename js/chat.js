@@ -14,7 +14,7 @@ import {
 
 let currentUser = null;
 
-const currentUserDoc = await getDoc(doc(db, "users", msgData.uid));
+const currentUserDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
 currentUser = currentUserDoc.exists() ? currentUserDoc.data().username : "Unknown";
 
 document.getElementById("username").innerText = currentUser;
