@@ -14,20 +14,37 @@ import {
 
 let currentUser = null;
 
-const currentUserDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
-currentUser = currentUserDoc.exists() ? currentUserDoc.data().username : "Unknown";
 
-document.getElementById("username").innerText = currentUser;
+
 
 // Ensure only logged-in users can access
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
+    // Redirect if not logged in
     window.location.href = "index.html";
   } else {
     currentUser = user;
     console.log("Logged in as:", user.email);
+
+    try {
+      // Fetch the user's Firestore doc by UID
+      const currentUserDoc = await getDoc(doc(db, "users", user.uid));
+      const currentUsername = currentUserDoc.exists()
+        ? currentUserDoc.data().username
+        : "Unknown";
+
+      // Show it in your HTML
+      document.getElementById("username").innerText = currentUsername;
+    } catch (err) {
+      console.error("Error fetching user doc:", err);
+    }
   }
 });
+
+
+const currentUserDoc = await getDoc(doc(db, "users", user.uid));
+const currentUsername = currentUserDoc.exists() ? currentUserDoc.data().username : "Unknown";
+document.getElementById("username").innerText = currentUsername;
 
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
