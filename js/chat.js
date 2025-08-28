@@ -14,6 +14,10 @@ import {
 
 let currentUser = null;
 
+const currentUserDoc = await getDoc(doc(db, "users", msgData.uid));
+currentUser = currentUserDoc.exists() ? currentUserDoc.data().username : "Unknown";
+
+document.getElementById("username").innerText = currentUser;
 
 // Ensure only logged-in users can access
 onAuthStateChanged(auth, user => {
@@ -82,7 +86,7 @@ async function listenForMessages(callback) {
         if (change.type === "added") {
           const msgData = change.doc.data();
           const userDoc = await getDoc(doc(db, "users", msgData.uid));
-          const username = userDoc.exists() ? userDoc.data().username : "Unknown";
+          const username = userDoc.exists() ? userDoc.data().username : "Unknown (" + msgData.uid + ")";
           messages.push({
             id: change.doc.id,
             uid: msgData.uid,
