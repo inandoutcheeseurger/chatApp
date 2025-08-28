@@ -1,28 +1,59 @@
 #messages {
-  border: 1px solid #ccc;
   height: 300px;
   overflow-y: scroll;
   padding: 5px;
   margin-bottom: 10px;
 }
+
+/* For Chrome, Edge, Safari */
+#messages::-webkit-scrollbar {
+  width: 8px;             /* thin scrollbar */
+}
+
+#messages::-webkit-scrollbar-track {
+  background: transparent;  /* no ugly gray track */
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background-color: #666;   /* scrollbar color */
+  border-radius: 10px;      /* rounded */
+  border: 2px solid transparent; /* spacing around thumb */
+  background-clip: content-box;
+}
+
+#messages::-webkit-scrollbar-thumb:hover {
+  background-color: #999;   /* lighter on hover */
+}
+
+/* For Firefox */
+#messages {
+  scrollbar-width: thin;          /* "auto" | "thin" */
+  scrollbar-color: #666 transparent; /* thumb | track */
+}
+
+
 .messageBox {
   padding: 5px;
   margin: 2px 0;
+  display: flex;   /* let children (username + text) align horizontally */
+  flex-direction: column; /* stack them vertically */
+  
 }
 .mine {
   background-color: #430952;
 }
 .myMsgDiv{
-  text-align: right;
+  align-items:flex-end;
 }
 .theirs {
   background-color: #1f2022;
 }
-.messageTxt{
+.mesageTxt{
   color: white;
   font-size: 15px;
   width:fit-content;
-  border-radius: 20px;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
 }
 .username{
   color: lightgray;

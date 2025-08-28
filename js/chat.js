@@ -111,7 +111,7 @@ function updateChatLog(messages, currentUserId) {
 
     const currMsgTxt = document.createElement("div");
     currMsgTxt.textContent = message.text;
-    currMsgTxt.classList.add("mesageTxt");
+    currMsgTxt.classList.add("messageTxt");
 
     // mark as mine/theirs
     if (message.uid === currentUserId) {
