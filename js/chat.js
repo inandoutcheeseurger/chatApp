@@ -42,9 +42,6 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 
-const currentUserDoc = await getDoc(doc(db, "users", user.uid));
-const currentUsername = currentUserDoc.exists() ? currentUserDoc.data().username : "Unknown";
-document.getElementById("username").innerText = currentUsername;
 
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
